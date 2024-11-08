@@ -7,15 +7,15 @@ typedef struct joc{
     struct joc *next;
 } joc_t;
 
-struct joc *creare_nod(){
-    struct joc *nod_nou=malloc(sizeof(joc_t));
+joc_t *creare_nod(){
+    joc_t *nod_nou=malloc(sizeof(joc_t));
     scanf("%s", nod_nou->nume);
     scanf("%d", &nod_nou->carte);
     nod_nou->next=NULL;
     return nod_nou;
 }
 
-struct joc *adaugare(struct joc *head){
+joc_t *adaugare(joc_t *head){
     if(head==NULL){
         head=creare_nod();
         return head;
@@ -32,10 +32,19 @@ struct joc *adaugare(struct joc *head){
     }
 }
 
+void afisare(joc_t *head){
+    
+}
+
 int main(){
     int nr_jucatori;
+    joc_t *lista_joc=NULL;
+    
     scanf("%d", &nr_jucatori);
-    //for()
+    for(int i=0;i<nr_jucatori;i++){
+        lista_joc=adaugare(lista_joc);
+    }
+        
     
     return 0;
 }
