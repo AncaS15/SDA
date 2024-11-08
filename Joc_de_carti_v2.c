@@ -10,7 +10,6 @@ typedef struct joc{
 joc_t *creare_nod(){
     joc_t *nod_nou=malloc(sizeof(joc_t));
     scanf("%s", nod_nou->nume);
-    nod_nou->carte=0;
     nod_nou->next=NULL;
     return nod_nou;
 }
