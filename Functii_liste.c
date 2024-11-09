@@ -4,7 +4,7 @@ struct node{
 
 node_t *creare_nod(){
     node_t *nod_nou = malloc(sizeof(node_t));
-    // citire date
+    //citire date
     nod_nou->next=NULL;
     return nod_nou;
 }
