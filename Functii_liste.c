@@ -54,7 +54,6 @@ node_t *eliminare_nod_inceput_lista(struct node *head){
     if(head==NULL)
         return NULL;
 
-    nod_curent=head;
     head=head->next;
     free(nod_curent);
     return head;
