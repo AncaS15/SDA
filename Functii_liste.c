@@ -40,7 +40,7 @@ node_t *eliminare_nod_sfarsit_lista(struct node *head){
     }
 
     while(nod_curent->next->next!=NULL)
-        nod_curent = nod_curent->next;
+        nod_curent=nod_curent->next;
 
     nod_sters=nod_curent->next;
     free(nod_sters);
