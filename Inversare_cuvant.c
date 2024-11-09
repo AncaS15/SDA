@@ -25,7 +25,6 @@ cuvant_t *eliminare(cuvant_t *head){
     cuvant_t *nod_curent=head;
     if(head==NULL)
         return NULL;
-    nod_curent=head;
     head=head->next;
     free(nod_curent);
     return head;
@@ -42,7 +41,7 @@ int main(){
     char cuvant[100];
     cuvant_t *v=NULL;
     cuvant_t *c=NULL;
-    
+
     scanf("%s", cuvant);
     for(int i=0;i<strlen(cuvant);i++){
         if(verif_vocala(cuvant[i]))
