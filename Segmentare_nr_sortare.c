@@ -32,24 +32,36 @@ codru *adaugare(codru *head, int x){
     return head;
 }
 
-void afisare(codru *head){
+void afisare_par(codru *head){
     if(head==NULL)
         return;
-    afisare(head->nod_s);
-    printf("%d ", head->x);
-    afisare(head->nod_d);
+    afisare_par(head->nod_s);
+    if(head->x%2==0)
+        printf("%d ", head->x);
+    afisare_par(head->nod_d);
+    return;
+}
+
+void afisare_impar(codru *head){
+    if(head==NULL)
+        return;
+    afisare_impar(head->nod_d);
+    if(head->x%2!=0)
+        printf("%d ", head->x);
+    afisare_impar(head->nod_s);
     return;
 }
 
 int main(){
-    int x;
+    int a;
     codru *padure=NULL;
-    while(scanf("%d", &x)!=EOF){
+    while(scanf("%d", &a)!=EOF){
         
-        padure=adaugare(padure,x);
+        padure=adaugare(padure,a);
     }
     
-    afisare(padure);
+    afisare_par(padure);
+    afisare_impar(padure);
     
     return 0;
 }
