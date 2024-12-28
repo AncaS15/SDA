@@ -67,9 +67,8 @@ void gestiune(user **v, int n){
             for(a=0;a<n;a++){
                 user *nod=v[a];
                 while(nod!=NULL){
-                    if(hash_index(nod->nume)%i==j){
+                    if(hash_index(nod->nume)%i==j)
                         k++;
-                    }
                     nod=nod->next;
                 }
             }
