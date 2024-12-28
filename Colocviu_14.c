@@ -54,9 +54,32 @@ void user_similar(user *head, char username[30]){
         }
         nod=nod->next;
     }
-    printf("\n");
     if(k==0)
         printf("Nu exista useri similari");
+    printf("\n");
+}
+
+void gestiune(user **v, int n){
+    int k,i,j,a;
+    for(i=n;;i++){
+        for(j=0;j<i;j++){
+            k=0;
+            for(a=0;a<n;a++){
+                user *nod=v[a];
+                while(nod!=NULL){
+                    if(hash_index(nod->nume)%i==j){
+                        k++;
+                    }
+                    nod=nod->next;
+                }
+            }
+            if(k>2)
+                break;
+        }
+        if(j==i)
+            break;
+    }
+    printf("%d", i);
 }
 
 int main(){
@@ -84,6 +107,9 @@ int main(){
             scanf("%s", username);
             user_similar(v[hash_index(username)%n],username);
         }
+    }
+    else if(t==3){
+        gestiune(v,n);
     }
     
     return 0;
