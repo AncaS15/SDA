@@ -54,10 +54,26 @@ int litere(char c1[20], char c2[20]){
 void anagrame(text *head, char c2[20], int m){
     text *nod=head;
     while(nod!=NULL){
-        if(hash_index(nod->cuvant)%m==hash_index(c2)%m && litere(nod->cuvant,c2)){
+        if(hash_index(nod->cuvant)%m==hash_index(c2)%m && litere(nod->cuvant,c2))
             printf("%s\n", nod->cuvant);
-        }
         nod=nod->next;
+    }
+}
+
+void test_3(text *head, int m){
+    text *nod_1=head;
+    while(nod_1!=NULL){
+        text *nod_2=head;
+        int k=0;
+        while(nod_2!=NULL){
+            if(hash_index(nod_1->cuvant)%m==hash_index(nod_2->cuvant)%m &&
+            litere(nod_1->cuvant,nod_2->cuvant) && strcmp(nod_1->cuvant,nod_2->cuvant))
+                k=1;
+            nod_2=nod_2->next;
+        }
+        if(!k)
+            printf("%s\n", nod_1->cuvant);
+        nod_1=nod_1->next;
     }
 }
 
@@ -88,7 +104,8 @@ int main(){
             anagrame(v[i],c2,m);
     }
     else if(t==3){
-        
+        for(int i=0;i<m;i++)
+            test_3(v[i],m);
     }
     
     return 0;
