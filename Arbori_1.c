@@ -16,20 +16,13 @@ arb *creare(int x){
     return nod;
 }
 
-arb *adaugare_nod(arb *head, int x){
-    if(head==NULL)
-        return creare(x);
-    if(head->x<x)
-        head->next_d=adaugare_nod(head->next_d,x);
-    if(head->x>x)
-        head->next_s=adaugare_nod(head->next_s,x);
-    return head;
-}
-
 arb *adaugare(arb *head, int x){
     if(head==NULL)
         return creare(x);
-    adaugare_nod(head,x);
+    if(head->x<x)
+        head->next_d=adaugare(head->next_d,x);
+    if(head->x>x)
+        head->next_s=adaugare(head->next_s,x);
     return head;
 }
 
