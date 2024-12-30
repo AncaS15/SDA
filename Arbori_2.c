@@ -18,20 +18,13 @@ oras *creare(char nume[30], int distanta){
     return nod;
 }
 
-oras *adaugare_nod(oras *head, char nume[30], int distanta){
-    if(head==NULL)
-        return creare(nume,distanta);
-    if(strcmp(head->nume,nume)>0)
-        head->next_s=adaugare_nod(head->next_s,nume,distanta);
-    if(strcmp(head->nume,nume)<0)
-        head->next_d=adaugare_nod(head->next_d,nume,distanta);
-    return head;
-}
-
 oras *adaugare(oras *head, char nume[30], int distanta){
     if(head==NULL)
         return creare(nume,distanta);
-    head=adaugare_nod(head,nume,distanta);
+    if(strcmp(head->nume,nume)>0)
+        head->next_s=adaugare(head->next_s,nume,distanta);
+    if(strcmp(head->nume,nume)<0)
+        head->next_d=adaugare(head->next_d,nume,distanta);
     return head;
 }
 
