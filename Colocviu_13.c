@@ -21,20 +21,13 @@ cuv_t *creare(char cuv[20]){
     return nod_nou;
 }
 
-cuv_t *adaugare_nod(cuv_t *head, char cuv[20]){
-    if(head==NULL)
-        return creare(cuv);
-    if(strcmp(head->c,cuv)<0)
-        head->nod_d=adaugare_nod(head->nod_d,cuv);
-    if(strcmp(head->c,cuv)>0)
-        head->nod_s=adaugare_nod(head->nod_s,cuv);
-    return head;
-}
-
 cuv_t *adaugare(cuv_t *head, char cuv[20]){
     if(head==NULL)
         return creare(cuv);
-    adaugare_nod(head,cuv);
+    if(strcmp(head->c,cuv)<0)
+        head->nod_d=adaugare(head->nod_d,cuv);
+    if(strcmp(head->c,cuv)>0)
+        head->nod_s=adaugare(head->nod_s,cuv);
     return head;
 }
 
