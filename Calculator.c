@@ -1,32 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct numar_1{
+typedef struct calculator{
     int cifra;
-    struct numar_1 *next;
-    struct numar_1 *prev;
-} nr_1;
+    struct calculator *next;
+    struct calculator *prev;
+} calc;
 
-nr_1 *creare_1(int cifra){
-    nr_1 *nod_nou=malloc(sizeof(nr_1));
+calc *creare_nod(int cifra){
+    calc *nod_nou=malloc(sizeof(calc));
     nod_nou->cifra=cifra;
     nod_nou->next=NULL;
+    nod_nou->prev=NULL;
     return nod_nou;
 }
 
-nr_1 *adaugare_1(nr_1 *head, int cifra){
-    nr_1 *nod_curent=head;
+calc *adaugare(calc *head, int cifra){
+    calc *nod_curent=head;
     if(head==NULL)
-        return creare_1(cifra);
+        return creare_nod(cifra);
     while(nod_curent->next!=NULL)
         nod_curent=nod_curent->next;
-    nod_curent->next=creare_1(cifra);
+    nod_curent->next=creare_nod(cifra);
     nod_curent->next->prev=nod_curent;
     return head;
 }
 
-void afisare(nr_1 *head){
-    nr_1 *nod_curent=head;
+void afisare(calc *head){
+    calc *nod_curent=head;
     while(nod_curent->next!=NULL)
         nod_curent=nod_curent->next;
     while(nod_curent->prev!=NULL){
@@ -36,51 +37,81 @@ void afisare(nr_1 *head){
     printf("%d\n", nod_curent->cifra);
 }
 
-nr_1 *esti_varza(nr_1 *n1, nr_1 *n2, nr_1 *n3){
-    while(n1!=NULL && n2!=NULL){
-        n3=adaugare_1(n3, n1->cifra+n2->cifra);
-        n1=n1->next;
-        n2=n2->next;
+calc *suma(calc *nr1, calc *nr2, calc *s){
+    while(nr1 && nr2){
+        s=adaugare(s, nr1->cifra+nr2->cifra);
+        nr1=nr1->next;
+        nr2=nr2->next;
     }
-    while(n1!=NULL){
-        n3=adaugare_1(n3, n1->cifra);
-        n1=n1->next;
+    while(nr1){
+        s=adaugare(s,nr1->cifra);
+        nr1=nr1->next;
     }
-    while(n2!=NULL){
-        n3=adaugare_1(n3, n2->cifra);
-        n2=n2->next;
+    while(nr2){
+        s=adaugare(s,nr2->cifra);
+        nr2=nr2->next;
     }
-    return n3;
+    return s;
 }
 
-nr_1 *suma(nr_1 *head){
-    nr_1 *n3=head;
-    while(n3!=NULL){
-        if(n3->cifra>9){
-            n3->cifra-=10;
-            n3->next->cifra+=1;
+calc *suma_final(calc *head){
+    calc *s=head;
+    while(s){
+        if(s->cifra>9){
+            s->cifra-=10;
+            s->next->cifra+=1;
         }
-        n3=n3->next;
+        s=s->next;
     }
-    // if(n3->cifra>9){
-    //     n3->cifra-=10;
-    //     head=adaugare_1(head,1);
-    // }
     return head;
 }
 
+calc *dif(calc *nr1, calc *nr2, calc *d){
+    while(nr1 && nr2){
+        if(nr1->cifra<nr2->cifra){
+            d=adaugare(d, (nr1->cifra+10)-nr2->cifra);
+            nr1->next->cifra-=1;
+        }
+        else
+            d=adaugare(d, nr1->cifra-nr2->cifra);
+        nr1=nr1->next;
+        nr2=nr2->next;
+    }
+    return d;
+}
+
+void palindrom(calc *head){
+    calc *nod1=head;
+    calc *nod2=head;
+    while(nod2->next)
+        nod2=nod2->next;
+    while(nod1->cifra!=nod2->cifra){
+        if(nod1->cifra!=nod2->cifra){
+            printf("nu");
+            return;
+        }
+        nod1=nod1->next;
+        nod2=nod2->prev;
+    }
+    printf("da");
+}
+
 int main(){
-    int n1,n2,t;
-    nr_1 *nr1=NULL;
-    nr_1 *nr2=NULL;
+    int n1, n2, t, a;
+    calc *nr1=NULL;
+    calc *nr2=NULL;
     
     scanf("%d%d%d", &n1,&n2,&t);
+    
+    if(n1>n2) a=1;
+    else a=0;
+    
     while(n1!=0){
-        nr1=adaugare_1(nr1,n1%10);
+        nr1=adaugare(nr1,n1%10);
         n1=n1/10;
     }
     while(n2!=0){
-        nr2=adaugare_1(nr2,n2%10);
+        nr2=adaugare(nr2,n2%10);
         n2=n2/10;
     }
     
@@ -89,10 +120,26 @@ int main(){
         afisare(nr2);
     }
     else if(t==2){
-        nr_1 *nr3=NULL;
-        nr3=esti_varza(nr1,nr2,nr3);
-        nr3=suma(nr3);
-        afisare(nr3);
+        calc *s=NULL;
+        s=suma(nr1,nr2,s);
+        s=suma_final(s);
+        afisare(s);
+    }
+    else if(t==3){
+        calc *d=NULL;
+        if(a)
+            d=dif(nr1,nr2,d);
+        else{
+            printf("-");
+            d=dif(nr2,nr1,d);
+        }
+        afisare(d);
+    }
+    else if(t==4){
+        calc *s=NULL;
+        s=suma(nr1,nr2,s);
+        s=suma_final(s);
+        palindrom(s);
     }
     
     return 0;
