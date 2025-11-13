@@ -11,13 +11,10 @@ node_t *creare_nod(){
 
 node_t *adaugare_nod_sfarsit_lista(struct node *head){
     node_t *nod_curent=head;
-
     if(head==NULL)
         return creare_nod();
-
     while(nod_curent->next!=NULL)
         nod_curent=nod_curent->next;
-
     nod_curent->next=creare_nod();
     return head;
 }
