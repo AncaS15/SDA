@@ -47,8 +47,6 @@ struct NOD *add_to_end(struct NOD *head)
     return head;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 int find_list_length(struct NOD *head){
     struct NOD *nod_curent=head;
     int k=0;
