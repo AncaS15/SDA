@@ -7,7 +7,6 @@ struct jucator{
     int carte_1, carte_2;
     int carti_t[7];
     int mana[5];
-    //int pct=0;
 };
 
 void afisare(struct jucator * joc, int n){
@@ -116,19 +115,14 @@ int main(){
                     (joc+i)->mana[x+2]=(joc+i)->carti_t[j+2];
                     j+=2;
                     x+=3;
-                    //(joc+i)->carti_t[j]=0; (joc+i)->carti_t[j+1]=0; (joc+i)->carti_t[j+2]=0;
                 }
                 else if((joc+i)->carti_t[j]!=0 && (joc+i)->carti_t[j]==(joc+i)->carti_t[j+1]){
                     (joc+i)->mana[x]=(joc+i)->carti_t[j];
                     (joc+i)->mana[x+1]=(joc+i)->carti_t[j+1];
                     j+=1;
                     x+=2;
-                    //(joc+i)->carti_t[j]=0; (joc+i)->carti_t[j+1]=0;
                 }
             }
-            // for(int j=0;j<7 && x<5;j++)
-            //     if((joc+i)->carti_t[j]!=0)
-            //         (joc+i)->mana[x++]=(joc+i)->carti_t[j];
             for(int j=0;j<7 && x<5;j++){
                 int a=0;
                 for(int k=0;k<5;k++){
@@ -148,11 +142,5 @@ int main(){
             printf("\n");
         }
     }
-    else if(c==4){
-        
-    }
-        
-    
-    
     return 0;
 }
