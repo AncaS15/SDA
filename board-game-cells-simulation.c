@@ -90,9 +90,6 @@ int main(){
         scanf("%d%d", &celula, &zar);
         test_2(list,celula,zar);
     }
-    else if(t==3){
-        
-    }
     
     return 0;
 }
