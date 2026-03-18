@@ -33,7 +33,6 @@ struct LISTA *adaugare_nod(struct LISTA *prim)
     scanf("%d", &nod_nou->data); 
     nod_nou->nod_urmator = NULL; 
 
-    // plasare pe ultimul nod:
     if (prim != NULL)
     {
         while (curent->nod_urmator != NULL)
